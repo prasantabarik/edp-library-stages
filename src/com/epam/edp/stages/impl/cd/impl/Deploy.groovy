@@ -285,7 +285,7 @@ class Deploy {
         return tempEntityList
     }
 
-    void deployServices(context) {
+    /* void deployServices(context) {
         script.println("[JENKINS][DEBUG] Start service deploying.")
 
         def chartmuseumUrl = context.job.getParameterValue("CHARTMUSEUM_URL", "https://chartmuseum-oc-green-edp-cicd.delivery.aws.main.edp.projects.epam.com")
@@ -298,7 +298,7 @@ class Deploy {
             def params = getServiceHelmCommand(s, context.job.dnsWildcard, context.job.deployProject)
             deployService(s.name, s.url, params, context.job.deployProject)
         }
-    }
+    }*/
 
     def deployService(name, chartPath, params, ns) {
         def command = "helm -n ${ns} upgrade --atomic --install ${name} ${chartPath} --wait --timeout=300s"
