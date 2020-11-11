@@ -357,7 +357,7 @@ class Deploy {
             context.platform.createRoleBinding(context.job.buildUser, "admin", context.job.deployProject)
         }
 
-        deployServices(context)
+       // deployServices(context)
 
         def deployCodebasesList = context.job.codebasesList.clone()
         while (!deployCodebasesList.isEmpty()) {
