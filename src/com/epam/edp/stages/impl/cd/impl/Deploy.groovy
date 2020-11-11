@@ -301,7 +301,7 @@ class Deploy {
     }*/
 
     def deployService(name, chartPath, params, ns) {
-        def command = "helm -n ${ns} upgrade --atomic --install ${name} ${chartPath} --wait --timeout=300s"
+        def command = "helm -n ${ns} upgrade --atomic --install ${name} ${chartPath} --wait --timeout=900s"
         if (params) {
             for (p in params) {
                 command = "${command} --set ${p.name}=${p.value}"
