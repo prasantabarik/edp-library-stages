@@ -33,7 +33,7 @@ class GetVersionDotnetApplicationLibrary {
     void run(context) {
         script.dir("${context.workDir}") {
             context.codebase.deployableModule = script.sh(
-                    script: "find / -name *.csproj | xargs grep -Poh '<DeployableModule>\\K[^<]*' ",
+                    script: "find . -name *.csproj | xargs grep -Poh '<DeployableModule>\\K[^<]*' ",
                     returnStdout: true
             ).trim()
 
