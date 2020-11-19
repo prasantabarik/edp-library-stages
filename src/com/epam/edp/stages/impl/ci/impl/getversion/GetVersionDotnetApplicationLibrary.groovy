@@ -32,11 +32,16 @@ class GetVersionDotnetApplicationLibrary {
 
     void run(context) {
         script.dir("${context.workDir}") {
-            context.codebase.deployableModule = script.sh(
+           /* context.codebase.deployableModule = script.sh(
                     script: "find ./ -name *.csproj | xargs grep -Poh '<DeployableModule>\\K[^<]*' ",
                     returnStdout: true
-            ).trim()
+            ).trim() */
 
+            context.codebase.deployableModule = script.sh(
+                    script: "find ./ -name *.csproj | xargs grep -Poh ' ' ",
+                    returnStdout: true
+            ).trim()
+            
             if (context.codebase.config.versioningType == "edp") {
                 setVersionToArtifact(context)
                 context.codebase.vcsTag = "build/${context.codebase.version}"
@@ -53,7 +58,7 @@ class GetVersionDotnetApplicationLibrary {
                 context.codebase.isTag = "${context.git.branch}-${context.codebase.buildVersion}"
             }
 
-           // script.println("[JENKINS][DEBUG] Deployable module: ${context.codebase.deployableModule}")
+            script.println("[JENKINS][DEBUG] Deployable module: ${context.codebase.deployableModule}")
             context.codebase.deployableModuleDir = "${context.workDir}"
         }
         script.println("[JENKINS][DEBUG] Application version - ${context.codebase.version}")
